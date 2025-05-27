@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIFs para WhatsApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>GIFs para Enviar pelo WhatsApp</h1>
+        <form method="POST">
+            <input type="text" name="query" placeholder="Ex: gatos, memes" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        {% if gifs %}
+        <div class="gif-gallery">
+            {% for gif in gifs %}
+            <div class="gif-item">
+                <img src="{{ gif.images.original.url }}" alt="{{ gif.title }}">
+                <a href="https://wa.me/?text={{ gif.images.original.url }}" target="_blank">Enviar pelo WhatsApp</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
